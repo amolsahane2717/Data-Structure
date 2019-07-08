@@ -1,5 +1,8 @@
 package com.bootstart.main;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class TreeDemo {
 
 	public static void main(String[] args) {
@@ -34,6 +37,9 @@ public class TreeDemo {
 		System.out.println();
 		
 		System.out.println("Height:" + tree.height(tree.getRootNode()));
+		
+		System.out.println("Level Traversal : ");
+		tree.getLevelTraversal(tree.getRootNode());
 	}
 
 }
@@ -125,15 +131,18 @@ class Tree{
 	}
 	
 	void getLevelTraversal(Node root) {
-		if(root.left!=null) {
-			getLevelTraversal(root.left);
-		}else if(root.right!=null) {
-			getLevelTraversal(root.right);
-		}else if(root.left == null) {
-			System.out.println();
-		}else if(root.right == null) {
-			
+		Queue<Node> nodesToVisit = new LinkedList<Node>();
+		nodesToVisit.add(root);
+		while (!nodesToVisit.isEmpty()) {
+			Node node = nodesToVisit.poll();
+			System.out.println(node.data);
+			if(node.left!=null)
+				nodesToVisit.add(node.left);
+			if(node.right!=null)
+				nodesToVisit.add(node.right);
 		}
 		
 	}
+	
+
 }
